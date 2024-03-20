@@ -9,7 +9,7 @@
 #'
 #' @details
 #' Visit [get page of Firestore REST API docs](https://cloud.google.com/firestore/docs/reference/rest/v1beta1/projects.databases.documents/get)
-#' for more details. The `data` must be in this format:
+#' for more details.
 #'
 #' @examples
 #' \dontrun{

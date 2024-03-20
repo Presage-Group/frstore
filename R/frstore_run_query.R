@@ -18,7 +18,7 @@
 #' for more details.
 #'
 #' `structuredQuery` contains these parameters:
-#' \code{
+#' \preformatted{
 #'  {
 #'  "structuredQuery": {
 #'    "where": {
@@ -37,7 +37,7 @@
 #'        "collectionId": "<<collection>>"
 #'      }
 #'    ]
-#'  }
+#'   }
 #'  }
 #' }
 #' Each value in `<<>>` corresponds to a parameter. `op` can be `LESS_THAN`, `LESS_THAN_OR_EQUAL`,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/frstore_req.R
 \name{frstore_req}
 \alias{frstore_req}
-\title{Basic structure of Cloud Firestore request without performing it}
+\title{Create basic structure of Cloud Firestore request without performing it}
 \usage{
 frstore_req(
   document_path,

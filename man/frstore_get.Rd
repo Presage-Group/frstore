@@ -21,7 +21,7 @@ Perform GET request to Cloud Firestore database to get data
 }
 \details{
 Visit \href{https://cloud.google.com/firestore/docs/reference/rest/v1beta1/projects.databases.documents/get}{get page of Firestore REST API docs}
-for more details. The \code{data} must be in this format:
+for more details.
 }
 \examples{
 \dontrun{

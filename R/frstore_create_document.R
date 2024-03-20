@@ -2,7 +2,7 @@
 #'
 #' @param document_path Character. The path to a collection or a document.
 #' @param id_token Character. Firebase authentication token.
-#' @param data List with a specific structure containing data. Defaults to [NULL]. See Details.
+#' @param data List with a specific structure. Defaults to [NULL]. See Details.
 #'
 #' @return Request.
 #' @export
@@ -10,17 +10,28 @@
 #' @details
 #' Visit [createDocument page of Firestore REST API docs](https://cloud.google.com/firestore/docs/reference/rest/v1beta1/projects.databases.documents/createDocument)
 #' for more details. The `data` must be in this format:
-#' \code{
+#' \preformatted{
 #' list(
 #'   fields = list(
 #'     field1 = list("<someValue>" = <number>),
 #'     field2 = list("<someValue>" = <character>)
-#' )
+#'   )
 #' )
 #' }
-#' Where `someValue` can be `arrayValue`, `booleanValue`, `bytesValue`, `doubleValue`,
-#' `geoPointValue`, `integerValue`, `mapValue`, `nullValue`, `referenceValue`,
-#' `stringValue`, and `timestampValue`. We have tested only `arrayValue`, `doubleValue`,
+#' Where `someValue` can be:
+#' - `arrayValue`
+#' - `booleanValue`
+#' - `bytesValue`
+#' - `doubleValue`
+#' - `geoPointValue`
+#' - `integerValue`
+#' - `mapValue`
+#' - `nullValue`,
+#' - `referenceValue`
+#' - `stringValue`
+#' - `timestampValue`
+#'
+#' We have tested only `arrayValue`, `doubleValue`,
 #' `integerValue`, and `stringValue`.
 #'
 #' @examples

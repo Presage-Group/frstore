@@ -11,7 +11,7 @@ frstore_create_document(document_path, id_token, data = NULL)
 
 \item{id_token}{Character. Firebase authentication token.}
 
-\item{data}{List with a specific structure containing data. Defaults to \link{NULL}. See Details.}
+\item{data}{List with a specific structure. Defaults to \link{NULL}. See Details.}
 }
 \value{
 Request.
@@ -22,17 +22,30 @@ Perform POST request to Cloud Firestore database to post data
 \details{
 Visit \href{https://cloud.google.com/firestore/docs/reference/rest/v1beta1/projects.databases.documents/createDocument}{createDocument page of Firestore REST API docs}
 for more details. The \code{data} must be in this format:
-\code{
+\preformatted{
 list(
   fields = list(
     field1 = list("<someValue>" = <number>),
     field2 = list("<someValue>" = <character>)
-)
+  )
 )
 }
-Where \code{someValue} can be \code{arrayValue}, \code{booleanValue}, \code{bytesValue}, \code{doubleValue},
-\code{geoPointValue}, \code{integerValue}, \code{mapValue}, \code{nullValue}, \code{referenceValue},
-\code{stringValue}, and \code{timestampValue}. We have tested only \code{arrayValue}, \code{doubleValue},
+Where \code{someValue} can be:
+\itemize{
+\item \code{arrayValue}
+\item \code{booleanValue}
+\item \code{bytesValue}
+\item \code{doubleValue}
+\item \code{geoPointValue}
+\item \code{integerValue}
+\item \code{mapValue}
+\item \code{nullValue},
+\item \code{referenceValue}
+\item \code{stringValue}
+\item \code{timestampValue}
+}
+
+We have tested only \code{arrayValue}, \code{doubleValue},
 \code{integerValue}, and \code{stringValue}.
 }
 \examples{

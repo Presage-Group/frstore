@@ -43,7 +43,7 @@ Visit \href{https://cloud.google.com/firestore/docs/reference/rest/v1beta1/proje
 for more details.
 
 \code{structuredQuery} contains these parameters:
-\code{
+\preformatted{
  {
  "structuredQuery": {
    "where": {
@@ -62,7 +62,7 @@ for more details.
        "collectionId": "<<collection>>"
      }
    ]
- }
+  }
  }
 }
 Each value in \verb{<<>>} corresponds to a parameter. \code{op} can be \code{LESS_THAN}, \code{LESS_THAN_OR_EQUAL},
