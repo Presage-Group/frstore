@@ -2,7 +2,7 @@
 #'
 #' @param document_path Character. The path to a collection or a document.
 #' @param id_token Character. Firebase authentication token.
-#' @param data List with a specific structure containing data. Defaults to [NULL]. See [Details].
+#' @param data List with a specific structure containing data. Defaults to [NULL]. See Details.
 #'
 #' @return Request.
 #' @export

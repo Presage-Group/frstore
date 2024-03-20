@@ -2,21 +2,22 @@
 #'
 #' @param collection_path Character. The path to a collection or a subcollection that contains the document(s) you want to query.
 #' @param id_token Character. Firebase authentication token.
-#' @param field Character. [fieldPath] in [structuredQuery]. See [Details].
-#' @param operation Character. [op] in [structuredQuery]. See [Details].
-#' @param value_type Character. Part of [value] in [structuredQuery]. See [Details].
-#' @param value Character. Part of [value] in [structuredQuery]. See [Details].
+#' @param field Character. `fieldPath` in `structuredQuery`. See Details.
+#' @param operation Character. `op` in `structuredQuery`. See Details.
+#' @param value_type Character. Part of `value` in `structuredQuery`. See Details.
+#' @param value Character. Part of `value` in `structuredQuery`. See Details.
 #' @param project_id Character. Firebase project ID. Defaults to [frstore_project_id()].
 #' @param base_url Character. Cloud Firestore base url. Defaults to [frstore_base_url()].
 #'
 #' @return A list with requested document(s).
+#' @importFrom utils tail
 #' @export
 #'
 #' @details
-#' Visit [runQuery page of Firestore REST API docs](https://cloud.google.com/firestore/docs/reference/rest/v1beta1/projects.databases.documents/runQuery
+#' Visit [runQuery page of Firestore REST API docs](https://cloud.google.com/firestore/docs/reference/rest/v1beta1/projects.databases.documents/runQuery)
 #' for more details.
 #'
-#' [structuredQuery] contains these parameters:
+#' `structuredQuery` contains these parameters:
 #' \code{
 #'  {
 #'  "structuredQuery": {
@@ -39,7 +40,7 @@
 #'  }
 #'  }
 #' }
-#' Each value in `<<>>` corresponds to a parameter. [op] can be `LESS_THAN`, `LESS_THAN_OR_EQUAL`,
+#' Each value in `<<>>` corresponds to a parameter. `op` can be `LESS_THAN`, `LESS_THAN_OR_EQUAL`,
 #' `GREATER_THAN`, `GREATER_THAN_OR_EQUAL`, `EQUAL`, `NOT_EQUAL`, `ARRAY_CONTAINS`, `IN`,
 #' `ARRAY_CONTAINS_ANY`, and `NOT_IN`.
 #'
@@ -50,7 +51,9 @@
 #' frbs_sign_up(email = "<EMAIL>", password = "<PASSWORD>")
 #' # Sign in:
 #' foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
-#' # Suppose there is an existing subcollection at test/firstDoc/firstCollection and we want to get all docs where name matches "merry":
+#' # Suppose there is an existing subcollection at
+#' # test/firstDoc/firstCollection and
+#' # we want to get all docs where name matches "merry":
 #' frstore_run_query("test/firstDoc/firstCollection",
 #'   foo$idToken,
 #'   field = "name",
@@ -61,7 +64,7 @@
 frstore_run_query <- function(collection_path, id_token, field, operation, value_type, value,
                               project_id = frstore_project_id(), base_url = frstore_base_url()) {
   partial_path <- sub("/[^/]*$", "", collection_path)
-  collection_id <- tail(strsplit(collection_path, "/")[[1]], 1)
+  collection_id <- utils::tail(strsplit(collection_path, "/")[[1]], 1)
 
   if (partial_path == collection_id){
     path_url <- paste0("projects/", project_id, "/databases/(default)/documents", ":runQuery")

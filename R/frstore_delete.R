@@ -17,7 +17,9 @@
 #' frbs_sign_up(email = "<EMAIL>", password = "<PASSWORD>")
 #' # Sign in:
 #' foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
-#' # Suppose there is an existing document at test/firstDoc/firstCollection/doc and we want to delete it:
+#' # Suppose there is an existing document at
+#' # test/firstDoc/firstCollection/doc
+#' # and we want to delete it:
 #' frstore_delete("test/firstDoc/firstCollection/doc", foo$idToken)
 #' }
 frstore_delete <- function(document_path, id_token){

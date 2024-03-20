@@ -2,7 +2,7 @@
 #'
 #' @param document_path Character. The path to a collection or a document.
 #' @param id_token Character. Firebase authentication token.
-#' @param data List with a specific structure containing data. See [Details].
+#' @param data List with a specific structure containing data. See Details.
 #'
 #' @return Request.
 #' @export
@@ -30,7 +30,9 @@
 #' frbs_sign_up(email = "<EMAIL>", password = "<PASSWORD>")
 #' # Sign in:
 #' foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
-#' # Suppose there is an existing document at test/firstDoc/firstCollection/doc and we want to update it with new data:
+#' # Suppose there is an existing document at
+#' # test/firstDoc/firstCollection/doc
+#' # and we want to update it with new data:
 #' data_list <- list(
 #'    fields = list(
 #'      age = list("integerValue" = 3600),
