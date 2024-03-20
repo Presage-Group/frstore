@@ -3,7 +3,7 @@ Title: R Wrapper for Cloud Firestore REST API
 Version: 0.0.0.9000
 Authors@R: 
     person("Umair", "Durrani", , "udurrani@presagegroup.com", role = c("aut", "cre"))
-Description: 'frstore' is a convenient way to perfrom the create, read, update, and delete
+Description: 'frstore' is a convenient way to perform the create, read, update, and delete
     (CRUD) operations on the Cloud Firestore database via REST API.
     It enables R developers to integrate Firebase's Firestore database storage 
     into their projects, particularly in shiny apps.
