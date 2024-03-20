@@ -31,7 +31,29 @@ foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
 
 `foo$idToken` provides the access token.
 
-## Create document(s)
+## Usage
+
+Put the Firebase project ID in your .Renviron as `FIREBASE_PROJECT_ID`:
+
+``` r
+FIREBASE_PROJECT_ID = "<Firebase-Project-ID>"
+```
+
+Functions in the package are named similar to the methods described in
+the REST resource `v1beta1.projects.databases.documents` in the [Cloud
+Firestore REST API
+docs](https://cloud.google.com/firestore/docs/reference/rest). All
+functions have the prefix `frstore_`. Currently, only these methods are
+implemented as functions:
+
+- createDocument  
+- delete  
+- get  
+- patch
+
+## Examples
+
+### Create document(s)
 
 Create a document without specifying data:
 
@@ -58,22 +80,22 @@ Create a document in the main collection:
 frstore_create_document("test/secondDoc", foo$idToken, data_list)
 ```
 
-## Read data
+### Read data
 
 Get document(s) with all fields:
 
 ``` r
 frstore_get("test", foo$idToken)
-frstore_get("test/doc", foo$idToken)
+frstore_get("test/firstDoc", foo$idToken)
 ```
 
 Get a specific field from a document:
 
 ``` r
-frstore_get("test/doc", foo$idToken, fields = c("age"))
+frstore_get("test/firstDoc", foo$idToken, fields = c("age"))
 ```
 
-## Update data
+### Update data
 
 Suppose there is an existing document at
 `test/firstDoc/firstCollection/doc` and we want to update it with new
@@ -89,7 +111,7 @@ data_list <- list(
 frstore_patch("test/firstDoc/firstCollection/doc", foo$idToken, data_list)
 ```
 
-## Delete data
+### Delete data
 
 Suppose there is an existing document at
 `test/firstDoc/firstCollection/doc` and we want to delete it:
