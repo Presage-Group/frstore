@@ -1,12 +1,15 @@
 Package: frstore
-Title: What the Package Does (One Line, Title Case)
+Title: R Wrapper for Cloud Firestore REST API
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Umair", "Durrani", , "udurrani@presagegroup.com", role = c("aut", "cre"))
+Description: 'frstore' is a convenient way to perfrom the create, read, update, and delete
+    (CRUD) operations on the Cloud Firestore database via REST API.
+    It enables R developers to integrate Firebase's Firestore database storage 
+    into their projects, particularly in shiny apps.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.0
+Imports: 
+    glue
