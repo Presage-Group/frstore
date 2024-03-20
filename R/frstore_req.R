@@ -1,4 +1,4 @@
-#' Basic structure of Cloud Firestore request without performing it
+#' Create basic structure of Cloud Firestore request without performing it
 #'
 #' Other functions add steps to `frstore_req()` and then perform the request.
 #'
