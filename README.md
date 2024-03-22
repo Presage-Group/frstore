@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# frstore
+# frstore \<img src=“inst/figures/logo.png” align=“right” height=“138” alt=“frstore logo /\>
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -11,15 +11,26 @@ delete (CRUD) operations on the Cloud Firestore database via REST API.
 
 ## Installation
 
-You can install the development version of frstore like so:
+You can install the development version of `frstore` like so:
 
 ``` r
 remotes::install_github("udurraniAtPresage/frstore")
 ```
 
-{frstore} requires an access token to interact with the Cloud Firestore
-database. [{frbs}](https://github.com/kennedymwavu/frbs/tree/main)
-provides useful functions to sign up and sign in:
+## Usage
+
+`frstore` requires the Firebase project ID that you can obtain from the
+project settings page. Put the Firebase project ID in your .Renviron as
+`FIREBASE_PROJECT_ID`:
+
+``` r
+FIREBASE_PROJECT_ID = "<Firebase-Project-ID>"
+```
+
+Furthermore, `frstore` requires an access token to interact with the
+Cloud Firestore database. [`frbs`
+package](https://github.com/kennedymwavu/frbs/tree/main) provides useful
+functions to sign up and sign in:
 
 ``` r
 library(frbs)
@@ -31,15 +42,7 @@ foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
 
 `foo$idToken` provides the access token.
 
-## Usage
-
-Put the Firebase project ID in your .Renviron as `FIREBASE_PROJECT_ID`:
-
-``` r
-FIREBASE_PROJECT_ID = "<Firebase-Project-ID>"
-```
-
-Functions in the package are named similar to the methods described in
+Functions in this package are named similar to the methods described in
 the REST resource `v1beta1.projects.databases.documents` in the [Cloud
 Firestore REST API
 docs](https://cloud.google.com/firestore/docs/reference/rest). All
