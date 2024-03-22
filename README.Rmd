@@ -57,6 +57,7 @@ Functions in this package are named similar to the methods described in the REST
 - delete  
 - get  
 - patch  
+- runQuery  
 
 ## Examples
 
@@ -125,6 +126,24 @@ Suppose there is an existing document at `test/firstDoc/firstCollection/doc` and
 ```{r delete, eval=FALSE}
 frstore_delete("test/firstDoc/firstCollection/doc", foo$idToken)
 ```
+
+
+### Run query
+
+Suppose there is an existing subcollection at `test/firstDoc/firstCollection` and we want to get all documents where the `name` field matches `"merry"`:
+
+```{r runquery, eval=FALSE}
+frstore_run_query(
+  "test/firstDoc/firstCollection",
+  foo$idToken,
+  field = "name",
+  operation = "EQUAL",
+  value_type = "stringValue",
+  value = "merry"
+)
+```
+
+
 
 
 ## Acknowledgements

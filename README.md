@@ -54,7 +54,8 @@ implemented as functions:
 - createDocument  
 - delete  
 - get  
-- patch
+- patch  
+- runQuery
 
 ## Examples
 
@@ -123,6 +124,23 @@ Suppose there is an existing document at
 
 ``` r
 frstore_delete("test/firstDoc/firstCollection/doc", foo$idToken)
+```
+
+### Run query
+
+Suppose there is an existing subcollection at
+`test/firstDoc/firstCollection` and we want to get all documents where
+the `name` field matches `"merry"`:
+
+``` r
+frstore_run_query(
+  "test/firstDoc/firstCollection",
+  foo$idToken,
+  field = "name",
+  operation = "EQUAL",
+  value_type = "stringValue",
+  value = "merry"
+)
 ```
 
 ## Acknowledgements
