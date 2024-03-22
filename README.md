@@ -124,3 +124,10 @@ Suppose there is an existing document at
 ``` r
 frstore_delete("test/firstDoc/firstCollection/doc", foo$idToken)
 ```
+
+## Acknowledgements
+
+The authors of `frstore` are grateful to [Kennedy
+Mwavu](https://github.com/kennedymwavu) for the [frbs
+package](https://github.com/kennedymwavu/frbs/tree/main) that provided
+inspiration and code help in the development of `frstore`.
