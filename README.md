@@ -16,7 +16,7 @@ delete (CRUD) operations on the Cloud Firestore database via REST API.
 You can install the development version of `frstore` like so:
 
 ``` r
-remotes::install_github("udurraniAtPresage/frstore")
+remotes::install_github("Presage-Group/frstore")
 ```
 
 ## Usage
