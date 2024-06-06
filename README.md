@@ -148,4 +148,4 @@ frstore_run_query(
 The authors of `frstore` are grateful to [Kennedy
 Mwavu](https://github.com/kennedymwavu) for the [frbs
 package](https://github.com/kennedymwavu/frbs/tree/main) that provided
-inspiration and code help in the development of `frstore`.
+inspiration and code help in the development of `frstore`. We are also thankful to Gabriel for writing the article [*Introduction to working with firestore in R*](https://gabrielcp.medium.com/introduction-to-working-with-firestore-in-r-99443489b01b) without which we would not know where to start.
