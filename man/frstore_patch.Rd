@@ -4,7 +4,7 @@
 \alias{frstore_patch}
 \title{Perform PATCH request to Cloud Firestore database to update data}
 \usage{
-frstore_patch(document_path, id_token, data)
+frstore_patch(document_path, id_token, data, field = NULL)
 }
 \arguments{
 \item{document_path}{Character. The path to a collection or a document.}
@@ -12,6 +12,8 @@ frstore_patch(document_path, id_token, data)
 \item{id_token}{Character. Firebase authentication token.}
 
 \item{data}{List with a specific structure. See Details.}
+
+\item{field}{Character. Field to update.}
 }
 \value{
 Request.

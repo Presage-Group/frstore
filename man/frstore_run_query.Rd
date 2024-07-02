@@ -11,6 +11,7 @@ frstore_run_query(
   operation,
   value_type,
   value,
+  selected_fields = NULL,
   project_id = frstore_project_id(),
   base_url = frstore_base_url()
 )
@@ -27,6 +28,8 @@ frstore_run_query(
 \item{value_type}{Character. Part of \code{value} in \code{structuredQuery}. See Details.}
 
 \item{value}{Character. Part of \code{value} in \code{structuredQuery}. See Details.}
+
+\item{selected_fields}{Character. Part of \code{select} in \code{structuredQuery}. See Details.}
 
 \item{project_id}{Character. Firebase project ID. Defaults to \code{\link[=frstore_project_id]{frstore_project_id()}}.}
 
@@ -46,6 +49,7 @@ for more details.
 \preformatted{
  {
  "structuredQuery": {
+   <<select_clause>>
    "where": {
      "fieldFilter": {
        "field": {
