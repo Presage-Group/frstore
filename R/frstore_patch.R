@@ -3,6 +3,7 @@
 #' @param document_path Character. The path to a collection or a document.
 #' @param id_token Character. Firebase authentication token.
 #' @param data List with a specific structure. See Details.
+#' @param field Character. Field to update.
 #'
 #' @return Request.
 #' @export
@@ -52,9 +53,10 @@
 #' )
 #' frstore_patch("test/firstDoc/firstCollection/doc", foo$idToken, data_list)
 #' }
-frstore_patch <- function(document_path, id_token, data){
+frstore_patch <- function(document_path, id_token, data, field = NULL){
   tryCatch(
     expr = frstore_req(document_path, id_token) |>
+      httr2::req_url_query(updateMask.fieldPaths = field) |>
       httr2::req_body_json(data = data) |>
       httr2::req_method("PATCH") |>
       httr2::req_perform(),

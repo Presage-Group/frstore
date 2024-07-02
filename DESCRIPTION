@@ -1,6 +1,6 @@
 Package: frstore
 Title: R Wrapper for Cloud Firestore REST API
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Umair", "Durrani", , "udurrani@presagegroup.com", role = c("aut", "cre"))
 Description: 'frstore' is a convenient way to perform the create, read, update, and delete

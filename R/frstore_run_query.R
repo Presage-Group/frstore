@@ -6,6 +6,7 @@
 #' @param operation Character. `op` in `structuredQuery`. See Details.
 #' @param value_type Character. Part of `value` in `structuredQuery`. See Details.
 #' @param value Character. Part of `value` in `structuredQuery`. See Details.
+#' @param selected_fields Character. Part of `select` in `structuredQuery`. See Details.
 #' @param project_id Character. Firebase project ID. Defaults to [frstore_project_id()].
 #' @param base_url Character. Cloud Firestore base url. Defaults to [frstore_base_url()].
 #'
@@ -21,6 +22,7 @@
 #' \preformatted{
 #'  {
 #'  "structuredQuery": {
+#'    <<select_clause>>
 #'    "where": {
 #'      "fieldFilter": {
 #'        "field": {
@@ -62,6 +64,7 @@
 #'   value = "merry")
 #' }
 frstore_run_query <- function(collection_path, id_token, field, operation, value_type, value,
+                              selected_fields = NULL,
                               project_id = frstore_project_id(), base_url = frstore_base_url()) {
   partial_path <- sub("/[^/]*$", "", collection_path)
   collection_id <- utils::tail(strsplit(collection_path, "/")[[1]], 1)
@@ -72,9 +75,21 @@ frstore_run_query <- function(collection_path, id_token, field, operation, value
     path_url <- paste0("projects/", project_id, "/databases/(default)/documents/", partial_path, ":runQuery")
   }
 
+  # Constructing the select clause if selected_fields is provided
+  if (!is.null(selected_fields)) {
+    fields_json <- paste(lapply(selected_fields, function(field) {
+      glue::glue('{{"fieldPath": "{field}"}}', field = field)
+    }), collapse = ", ")
+
+    select_clause <- glue::glue('"select": {{"fields": [{fields_json}]}},', fields_json = fields_json)
+  } else {
+    select_clause <- ""
+  }
+
   queryBody <- glue::glue(
     '{
         "structuredQuery": {
+          <<select_clause>>
           "where": {
             "fieldFilter": {
               "field": {
@@ -98,6 +113,7 @@ frstore_run_query <- function(collection_path, id_token, field, operation, value
     value_type = value_type,
     value      = value,
     collection = collection_id,
+    select_clause = select_clause,
     .open      = "<<",
     .close     = ">>"
   )
