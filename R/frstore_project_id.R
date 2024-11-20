@@ -1,7 +1,7 @@
 #' Get Cloud Firebase Project ID
 #'
 #' @return Character. Firebase Project ID.
-#'
+#' @export
 #' @examples
 #' \dontrun{
 #' frstore_project_id()

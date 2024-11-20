@@ -7,10 +7,7 @@
 frstore_run_query(
   collection_path,
   id_token,
-  field,
-  operation,
-  value_type,
-  value,
+  filters,
   selected_fields = NULL,
   project_id = frstore_project_id(),
   base_url = frstore_base_url()
@@ -21,13 +18,7 @@ frstore_run_query(
 
 \item{id_token}{Character. Firebase authentication token.}
 
-\item{field}{Character. \code{fieldPath} in \code{structuredQuery}. See Details.}
-
-\item{operation}{Character. \code{op} in \code{structuredQuery}. See Details.}
-
-\item{value_type}{Character. Part of \code{value} in \code{structuredQuery}. See Details.}
-
-\item{value}{Character. Part of \code{value} in \code{structuredQuery}. See Details.}
+\item{filters}{List. Contains a list for each filter that includes filter type, field, operation, and value.}
 
 \item{selected_fields}{Character. Part of \code{select} in \code{structuredQuery}. See Details.}
 
@@ -49,7 +40,6 @@ for more details.
 \preformatted{
  {
  "structuredQuery": {
-   <<select_clause>>
    "where": {
      "fieldFilter": {
        "field": {
@@ -72,22 +62,4 @@ for more details.
 Each value in \verb{<<>>} corresponds to a parameter. \code{op} can be \code{LESS_THAN}, \code{LESS_THAN_OR_EQUAL},
 \code{GREATER_THAN}, \code{GREATER_THAN_OR_EQUAL}, \code{EQUAL}, \code{NOT_EQUAL}, \code{ARRAY_CONTAINS}, \code{IN},
 \code{ARRAY_CONTAINS_ANY}, and \code{NOT_IN}.
-}
-\examples{
-\dontrun{
-library(frbs)
-# Sign up via Firebase authentication:
-frbs_sign_up(email = "<EMAIL>", password = "<PASSWORD>")
-# Sign in:
-foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
-# Suppose there is an existing subcollection at
-# test/firstDoc/firstCollection and
-# we want to get all docs where name matches "merry":
-frstore_run_query("test/firstDoc/firstCollection",
-  foo$idToken,
-  field = "name",
-  operation = "EQUAL",
-  value_type = "stringValue",
-  value = "merry")
-}
 }

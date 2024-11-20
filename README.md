@@ -16,7 +16,7 @@ delete (CRUD) operations on the Cloud Firestore database via REST API.
 You can install the development version of `frstore` like so:
 
 ``` r
-remotes::install_github("Presage-Group/frstore")
+remotes::install_github("udurraniAtPresage/frstore")
 ```
 
 ## Usage
@@ -128,24 +128,15 @@ frstore_delete("test/firstDoc/firstCollection/doc", foo$idToken)
 
 ### Run query
 
-Suppose there is an existing subcollection at
-`test/firstDoc/firstCollection` and we want to get all documents where
-the `name` field matches `"merry"`:
+Three functions exist:
 
-``` r
-frstore_run_query(
-  "test/firstDoc/firstCollection",
-  foo$idToken,
-  field = "name",
-  operation = "EQUAL",
-  value_type = "stringValue",
-  value = "merry"
-)
-```
+- `frstore_run_query`  
+- `frstore_run_query_parallel`  
+- `frstore_run_query_sequential`
 
 ## Acknowledgements
 
 The authors of `frstore` are grateful to [Kennedy
 Mwavu](https://github.com/kennedymwavu) for the [frbs
 package](https://github.com/kennedymwavu/frbs/tree/main) that provided
-inspiration and code help in the development of `frstore`. We are also thankful to Gabriel for writing the article [*Introduction to working with firestore in R*](https://gabrielcp.medium.com/introduction-to-working-with-firestore-in-r-99443489b01b) without which we would not know where to start.
+inspiration and code help in the development of `frstore`.

@@ -1,7 +1,7 @@
 #' Get the base url for Cloud Firestore
 #'
 #' @return Character. Base url.
-#'
+#' @export
 #' @examples
 #' \dontrun{
 #' frstore_base_url()

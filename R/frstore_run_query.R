@@ -2,16 +2,14 @@
 #'
 #' @param collection_path Character. The path to a collection or a subcollection that contains the document(s) you want to query.
 #' @param id_token Character. Firebase authentication token.
-#' @param field Character. `fieldPath` in `structuredQuery`. See Details.
-#' @param operation Character. `op` in `structuredQuery`. See Details.
-#' @param value_type Character. Part of `value` in `structuredQuery`. See Details.
-#' @param value Character. Part of `value` in `structuredQuery`. See Details.
+#' @param filters List. Contains a list for each filter that includes filter type, field, operation, and value.
 #' @param selected_fields Character. Part of `select` in `structuredQuery`. See Details.
 #' @param project_id Character. Firebase project ID. Defaults to [frstore_project_id()].
 #' @param base_url Character. Cloud Firestore base url. Defaults to [frstore_base_url()].
 #'
 #' @return A list with requested document(s).
 #' @importFrom utils tail
+#' @importFrom glue glue
 #' @export
 #'
 #' @details
@@ -22,7 +20,6 @@
 #' \preformatted{
 #'  {
 #'  "structuredQuery": {
-#'    <<select_clause>>
 #'    "where": {
 #'      "fieldFilter": {
 #'        "field": {
@@ -45,31 +42,13 @@
 #' Each value in `<<>>` corresponds to a parameter. `op` can be `LESS_THAN`, `LESS_THAN_OR_EQUAL`,
 #' `GREATER_THAN`, `GREATER_THAN_OR_EQUAL`, `EQUAL`, `NOT_EQUAL`, `ARRAY_CONTAINS`, `IN`,
 #' `ARRAY_CONTAINS_ANY`, and `NOT_IN`.
-#'
-#' @examples
-#' \dontrun{
-#' library(frbs)
-#' # Sign up via Firebase authentication:
-#' frbs_sign_up(email = "<EMAIL>", password = "<PASSWORD>")
-#' # Sign in:
-#' foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
-#' # Suppose there is an existing subcollection at
-#' # test/firstDoc/firstCollection and
-#' # we want to get all docs where name matches "merry":
-#' frstore_run_query("test/firstDoc/firstCollection",
-#'   foo$idToken,
-#'   field = "name",
-#'   operation = "EQUAL",
-#'   value_type = "stringValue",
-#'   value = "merry")
-#' }
-frstore_run_query <- function(collection_path, id_token, field, operation, value_type, value,
+frstore_run_query <- function(collection_path, id_token, filters,
                               selected_fields = NULL,
                               project_id = frstore_project_id(), base_url = frstore_base_url()) {
   partial_path <- sub("/[^/]*$", "", collection_path)
   collection_id <- utils::tail(strsplit(collection_path, "/")[[1]], 1)
 
-  if (partial_path == collection_id){
+  if (partial_path == collection_id) {
     path_url <- paste0("projects/", project_id, "/databases/(default)/documents", ":runQuery")
   } else {
     path_url <- paste0("projects/", project_id, "/databases/(default)/documents/", partial_path, ":runQuery")
@@ -86,36 +65,49 @@ frstore_run_query <- function(collection_path, id_token, field, operation, value
     select_clause <- ""
   }
 
+  # Construct filters JSON
+  filters_json <- paste(lapply(filters, function(filter) {
+    if (filter$type == "fieldFilter") {
+      return(glue::glue('{
+        "fieldFilter": {
+          "field": {"fieldPath": "<<filter$field>>"},
+          "op": "<<filter$op>>",
+          "value": {"<<filter$value_type>>": "<<filter$value>>"}
+        }
+      }', .open = "<<", .close = ">>"))
+    } else if (filter$type == "unaryFilter") {
+      return(glue::glue('{
+        "unaryFilter": {
+          "field": {"fieldPath": "<<filter$field>>"},
+          "op": "<<filter$op>>"
+        }
+      }', .open = "<<", .close = ">>"))
+    }
+  }), collapse = ", ")
+
+  if (length(filters) == 1) {
+    filters_clause <- glue::glue('"where": <<filters_json>>,', filters_json = filters_json, .open = "<<", .close = ">>")
+  } else {
+    filters_clause <- glue::glue('"where": {"compositeFilter": {"op": "AND", "filters": [<<filters_json>>]}},', filters_json = filters_json, .open = "<<", .close = ">>")
+  }
+
   queryBody <- glue::glue(
     '{
-        "structuredQuery": {
-          <<select_clause>>
-          "where": {
-            "fieldFilter": {
-              "field": {
-                "fieldPath": "<<field>>"
-              },
-              "op": "<<operation>>",
-              "value": {
-                "<<value_type>>": "<<value>>"
-              }
-            }
-          },
-          "from": [
-            {
-              "collectionId": "<<collection>>"
-            }
-          ]
-        }
-      }',
-    field      = field,
-    operation  = operation,
-    value_type = value_type,
-    value      = value,
+      "structuredQuery": {
+        <<select_clause>>
+        <<filters_clause>>
+        "from": [
+          {
+            "collectionId": "<<collection>>"
+          }
+        ]
+      }
+    }',
     collection = collection_id,
     select_clause = select_clause,
-    .open      = "<<",
-    .close     = ">>"
+    filters_clause = filters_clause,
+    .open = "<<",
+    .close = ">>"
   )
 
   tryCatch(
