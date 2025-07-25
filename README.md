@@ -3,9 +3,10 @@
 
 # frstore
 
-<img src="inst/figures/logo.png" align="right" height="138" alt="frstore logo" />
+<img src="inst/figures/logo_edited.png" align="right" height="138" alt="frstore logo" />
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 {frstore} is an `R` interface to perform the create, read, update, and
@@ -30,16 +31,16 @@ FIREBASE_PROJECT_ID = "<Firebase-Project-ID>"
 ```
 
 Furthermore, `frstore` requires an access token to interact with the
-Cloud Firestore database. [`frbs`
-package](https://github.com/kennedymwavu/frbs/tree/main) provides useful
-functions to sign up and sign in:
+Cloud Firestore database. [`firebase.auth.rest`
+package](https://github.com/kennedymwavu/firebase.auth.rest) provides
+useful functions to sign up and sign in:
 
 ``` r
-library(frbs)
+library(firebase.auth.rest)
 # Sign up via Firebase authentication:
-frbs_sign_up(email = "<EMAIL>", password = "<PASSWORD>")
+sign_up(email = "<EMAIL>", password = "<PASSWORD>")
 # Sign in:
-foo <- frbs_sign_in(email = "<EMAIL>", password = "<PASSWORD>")
+foo <- sign_in(email = "<EMAIL>", password = "<PASSWORD>")
 ```
 
 `foo$idToken` provides the access token.
@@ -137,6 +138,6 @@ Three functions exist:
 ## Acknowledgements
 
 The authors of `frstore` are grateful to [Kennedy
-Mwavu](https://github.com/kennedymwavu) for the [frbs
-package](https://github.com/kennedymwavu/frbs/tree/main) that provided
-inspiration and code help in the development of `frstore`.
+Mwavu](https://github.com/kennedymwavu) for the [`firebase.auth.rest`
+package](https://github.com/kennedymwavu/firebase.auth.rest) that
+provided inspiration and code help in the development of `frstore`.
